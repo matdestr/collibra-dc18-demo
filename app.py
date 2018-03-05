@@ -14,8 +14,8 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
 
-    #print("Request:")
-    #print(json.dumps(req, indent=4))
+    # print("Request:")
+    # print(json.dumps(req, indent=4))
 
     res = makeWebhookResult(req)
 
@@ -25,6 +25,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "collibra.search":
 
@@ -33,19 +34,52 @@ def makeWebhookResult(req):
         parameters = result.get("parameters")
         asset_name = parameters.get("asset")
 
-        # rest call
-        response = requests.request('GET',"https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
-        print("Status code: ", response.status_code)
-        print("Response: ", response.text )
+        # rest call to advanced connect
+        # 200
+        response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
+        # 404
+        response = requests.request('GET',"https://thebest404pageeverredux.com/swf/indx.html")
 
+        print("Status code: ", response.status_code)
+        print("Response: ", response.text)
+
+        if (response.status_code == requests.codes.not_found):
+            return {
+                "speech": "Do you want to create it?",
+                "displayText": "Do you want to create it?",
+                "followupEvent": {
+                    "name": "create-asset"
+                }
+            }
+        else:
+            return {
+                "speech": response.text,
+                "displayText": response.text,
+                # "data": {},
+                # "contextOut": [],
+                "source": "apiai-collibra-dc18-demo"
+            }
+    elif req.get("result").get("action") == "collibra.create.asset":
+        # get all parameters
+        result = req.get("result")
+        parameters = result.get("parameters")
+        asset_name = parameters.get("asset")
+        context = parameters.get("context")
+
+        # rest call to basic connect
+        response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
+        print("Status code: ", response.status_code)
+        print("Response: ", response.text)
+
+        speech = "I have created the asset named " + asset_name + "in the context of: " + context
 
         return {
-            "speech": response.text,
-            "displayText": response.text,
-            # "data": {},
-            # "contextOut": [],
-            "source": "apiai-collibra-dc18-demo"
+            "speech": speech,
+            "displayText": speech
         }
+
+
+
 
     else:
         return {}
