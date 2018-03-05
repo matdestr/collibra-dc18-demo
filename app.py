@@ -43,14 +43,15 @@ def makeWebhookResult(req):
         print("Status code: ", response.status_code)
         print("Response: ", response.text)
 
-        if (response.status_code == requests.codes.not_found):
+        if response.status_code == requests.codes.not_found:
             return {
                 "speech": "Do you want to create it?",
                 "displayText": "Do you want to create it?",
                 "followupEvent": {
-                    "name": "create-asset"
+                    "name": "decide"
                 }
             }
+
         else:
             return {
                 "speech": response.text,
@@ -59,6 +60,26 @@ def makeWebhookResult(req):
                 # "contextOut": [],
                 "source": "apiai-collibra-dc18-demo"
             }
+    elif req.get("result").get("action") == "collibra.decide":
+        # get all parameters
+        result = req.get("result")
+        parameters = result.get("parameters")
+        asset_name = parameters.get("asset")
+        action = parameters.get("action")
+
+        if action == "retry":
+            return {
+                "followupEvent": {
+                    "name": "search"
+                }
+            }
+        elif action == "create asset":
+            return {
+                "followupEvent": {
+                    "name": "create-asset"
+                }
+            }
+
     elif req.get("result").get("action") == "collibra.create.asset":
         # get all parameters
         result = req.get("result")
