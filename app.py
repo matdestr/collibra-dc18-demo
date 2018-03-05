@@ -34,7 +34,15 @@ def makeWebhookResult(req):
         # get all parameters
         result = req.get("result")
         parameters = result.get("parameters")
-        asset_name = parameters.get("asset")
+        contexts = result.get("contexts")
+        asset_name = ""
+
+        for c in contexts:
+            if c.get("name") == "asset-known":
+                asset_name = c.get("parameters").get("asset")
+
+        if asset_name == "":
+            asset_name = parameters.get("asset")
 
         # rest call to advanced connect
         # 200
