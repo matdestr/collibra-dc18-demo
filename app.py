@@ -34,15 +34,14 @@ def makeWebhookResult(req):
         asset_name = parameters.get("asset")
 
         # rest call
-        # response = requests.request('GET',"...")
-        # print("Status code: ", response.status_code)
-        # print("Response: ", response.text )
+        response = requests.request('GET',"https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
+        print("Status code: ", response.status_code)
+        print("Response: ", response.text )
 
-        speech = "This is a dummy definition for " + asset_name
 
         return {
-            "speech": speech,
-            "displayText": speech,
+            "speech": response.text,
+            "displayText": response.text,
             # "data": {},
             # "contextOut": [],
             "source": "apiai-collibra-dc18-demo"
