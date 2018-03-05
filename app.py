@@ -90,8 +90,8 @@ def makeWebhookResult(req):
         # get all parameters
         result = req.get("result")
         contexts = result.get("contexts")
-        asset_name = contexts[0].get("asset")
-        context = contexts[0].get("context")
+        asset_name = contexts[0].get("parameters").get("asset")
+        context = contexts[0].get("parameters").get("context")
 
         print("contexts: " , contexts)
         print("name: ", asset_name)
