@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 
 from flask import Flask
 from flask import make_response
@@ -13,8 +14,8 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
 
-    print("Request:")
-    print(json.dumps(req, indent=4))
+    #print("Request:")
+    #print(json.dumps(req, indent=4))
 
     res = makeWebhookResult(req)
 
@@ -32,9 +33,12 @@ def makeWebhookResult(req):
         parameters = result.get("parameters")
         asset_name = parameters.get("asset")
 
-        speech = "This is a test definition for " + asset_name
+        # rest call
+        # response = requests.request('GET',"...")
+        # print("Status code: ", response.status_code)
+        # print("Response: ", response.text )
 
-        print(speech)
+        speech = "This is a dummy definition for " + asset_name
 
         return {
             "speech": speech,
