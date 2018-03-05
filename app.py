@@ -89,9 +89,9 @@ def makeWebhookResult(req):
 
         # get all parameters
         result = req.get("result")
-        parameters = result.get("parameters")
-        asset_name = parameters.get("asset")
-        context = parameters.get("context")
+        contexts = result.get("contexts")
+        asset_name = contexts[0].get("asset")
+        context = contexts[0].get("context")
 
         # rest call to basic connect
         response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
