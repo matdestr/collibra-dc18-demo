@@ -76,8 +76,15 @@ def makeWebhookResult(req):
         # get all parameters
         result = req.get("result")
         parameters = result.get("parameters")
-        asset_name = parameters.get("asset")
-        action = parameters.get("action")
+        contexts = result.get("contexts")
+        action = ""
+
+        for c in contexts:
+            if c.get("name") == "asset-known":
+                action = c.get("parameters").get("action")
+
+        if action == "":
+            action = parameters.get("action")
 
         if action == "retry":
             return {
