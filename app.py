@@ -84,7 +84,7 @@ def makeWebhookResult(req):
                 }
             }
 
-    elif req.get("result").get("action") == "collibra.create.asset":
+    elif req.get("result").get("action") == "collibra.create":
         print("CREATE INTENT")
 
         # get all parameters
