@@ -44,6 +44,8 @@ def makeWebhookResult(req):
         if asset_name == "":
             asset_name = parameters.get("asset")
 
+        print("Asset name: ", asset_name)
+
         # rest call to advanced connect
         # 200
         response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
