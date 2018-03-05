@@ -29,6 +29,8 @@ def webhook():
 def makeWebhookResult(req):
     if req.get("result").get("action") == "collibra.search":
 
+        print("SEARCH INTENT")
+
         # get all parameters
         result = req.get("result")
         parameters = result.get("parameters")
@@ -61,6 +63,8 @@ def makeWebhookResult(req):
                 "source": "apiai-collibra-dc18-demo"
             }
     elif req.get("result").get("action") == "collibra.decide":
+        print("DECIDE INTENT")
+
         # get all parameters
         result = req.get("result")
         parameters = result.get("parameters")
@@ -81,6 +85,8 @@ def makeWebhookResult(req):
             }
 
     elif req.get("result").get("action") == "collibra.create.asset":
+        print("CREATE INTENT")
+
         # get all parameters
         result = req.get("result")
         parameters = result.get("parameters")
