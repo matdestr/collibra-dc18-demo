@@ -40,7 +40,7 @@ def makeWebhookResult(req):
         # 200
         response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
         # 404
-        response = requests.request('GET',"https://thebest404pageeverredux.com/swf/indx.html")
+        response = requests.request('GET', "https://thebest404pageeverredux.com/swf/indx.html")
 
         print("Status code: ", response.status_code)
         print("Response: ", response.text)
@@ -90,10 +90,14 @@ def makeWebhookResult(req):
         # get all parameters
         result = req.get("result")
         contexts = result.get("contexts")
-        asset_name = contexts[0].get("parameters").get("asset")
-        context = contexts[0].get("parameters").get("context")
+        asset_name = ""
+        context = ""
+        for c in contexts:
+            if c.get("name") == "asset-known":
+                asset_name = c.get("parameters").get("asset")
+                context = c.get("parameters").get("context")
 
-        print("contexts: " , contexts)
+        print("contexts: ", contexts)
         print("name: ", asset_name)
         print("context: ", context)
 
