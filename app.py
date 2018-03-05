@@ -102,7 +102,7 @@ def makeWebhookResult(req):
         # print("Status code: ", response.status_code)
         # print("Response: ", response.text)
 
-        speech = "I have created the asset named " + asset_name + "in the context of: " + context
+        speech = "I have created the asset named " + asset_name + " in the context of " + context
 
         return {
             "speech": speech,
