@@ -93,10 +93,14 @@ def makeWebhookResult(req):
         asset_name = contexts[0].get("asset")
         context = contexts[0].get("context")
 
+        print("contexts: " , contexts)
+        print("name: ", asset_name)
+        print("context: ", context)
+
         # rest call to basic connect
-        response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
-        print("Status code: ", response.status_code)
-        print("Response: ", response.text)
+        # response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
+        # print("Status code: ", response.status_code)
+        # print("Response: ", response.text)
 
         speech = "I have created the asset named " + asset_name + "in the context of: " + context
 
