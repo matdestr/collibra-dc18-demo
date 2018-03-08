@@ -48,7 +48,7 @@ def makeWebhookResult(req):
 
         # rest call to advanced connect
         # 200
-        response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
+        # response = requests.request('GET', "https://53-dgc-nightly.collibra.com/rest/1.0/application/version")
         # 404
         response = requests.request('GET', "https://thebest404pageeverredux.com/swf/indx.html")
 
