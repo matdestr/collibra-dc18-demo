@@ -5,7 +5,7 @@ import requests
 from flask import Flask
 from flask import make_response
 from flask import request
-from flask_ask import Ask, statement
+from flask_ask import Ask, statement, question
 
 
 # Flask app should start in global layout
@@ -15,12 +15,12 @@ ask = Ask(app, '/webhook')
 @ask.intent("DefaultWelcomeIntent")
 def hello():
     speech_text = "Hello Julien!"
-    return statement(speech_text).simple_card('Hello', speech_text)
+    return question(speech_text)
 
 @ask.launch
 def launched():
-    speech = "Hellooooo"
-    return statement(speech).simple_card('Launch', speech)
+    speech = "Hello"
+    return question(speech)
 
 
 
