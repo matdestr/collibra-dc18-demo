@@ -17,6 +17,10 @@ def hello():
     speech_text = "Hello Julien!"
     return statement(speech_text).simple_card('Hello', speech_text)
 
+@ask.launch
+def launched():
+    speech = "Hellooooo"
+    return statement(speech).simple_card('Launch', speech)
 
 
 
